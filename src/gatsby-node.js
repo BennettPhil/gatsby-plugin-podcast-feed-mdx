@@ -15,6 +15,31 @@ const wrapper = promise => promise.then(result => {
 // Output the feed to a local file.
 exports.onPostBuild = async ({ graphql }, pluginOptions) => {
 
+  const subcategory3 = pluginOptions.subCategory3 ? {
+    'itunes:category': {
+      _attr: {
+        text: pluginOptions.subCategory3
+      }
+    }
+  } : {};
+
+  const subcategory2 = pluginOptions.subCategory2 ? {
+    'itunes:category': {
+      _attr: {
+        text: pluginOptions.subCategory2
+      }
+    }
+  } : {};
+
+  const subcategory1 = pluginOptions.subCategory1 ? {
+    'itunes:category': {
+      _attr: {
+        text: pluginOptions.subCategory1
+      }
+    }
+  } : {};
+
+
   // get the options for the podcast iteself
   const feedOptions = {
     title: pluginOptions.title,
@@ -61,31 +86,19 @@ exports.onPostBuild = async ({ graphql }, pluginOptions) => {
         {_attr: {
           text: pluginOptions.category1
         }},
-        {'itunes:category': {
-          _attr: {
-            text: pluginOptions.subCategory1
-          }
-        }}
+        subcategory1
       ]},
       {'itunes:category': [
         {_attr: {
           text: pluginOptions.category2
         }},
-        {'itunes:category': {
-          _attr: {
-            text: pluginOptions.subCategory2
-          }
-        }}
+        subcategory2
       ]},
       {'itunes:category': [
         {_attr: {
           text: pluginOptions.category3
         }},
-        {'itunes:category': {
-          _attr: {
-            text: pluginOptions.subCategory3
-          }
-        }}
+        subcategory3
       ]},
       {'googleplay:author': pluginOptions.authorName},
       {'googleplay:description': pluginOptions.summary.substring(0,999)},
